@@ -14,56 +14,56 @@ class BigTable extends Component {
                   changePrint: false,
 
                   phoneCase: { // w và h tính theo pixcel
-                        i6: { w: 791, h: 1630 },
-                        i7: { w: 786, h: 1606 },// vân trơn
+                        i6: { w: 80, h: 165 },
+                        i7:{ w: 80, h: 165 },// vân trơn
                         // i7: { w: 791, h: 1630 }, // default 
-                        i6plus: { w: 909, h: 1866 },
-                        i7plus: { w: 909, h: 1866 },
-                        ix: { w: 827, h: 1677 },// vân trơn
-                        ixs: { w: 827, h: 1677 },// vân trơn
+                        i6plus: { w: 80, h: 165 },
+                        i7plus: { w: 80, h: 165 },
+                        ix: { w: 80, h: 165 },// vân trơn
+                        ixs:{ w: 80, h: 165 },// vân trơn
                         // ix: { w: 791, h: 1654 },// default 
                         // ixs: { w: 791, h: 1654 },// default 
-                        ixr: { w: 874, h: 1760 },
-                        imax: { w: 909, h: 1866 },// vân trơn
+                        ixr:{ w: 80, h: 165 },
+                        imax: { w: 80, h: 165 },// vân trơn
                         // imax: { w: 898, h: 1831 },// default 
-                        i11pro: { w: 827, h: 1677 },
-                        i11: { w: 886, h: 1772 }, // vân trơn
+                        i11pro: { w: 80, h: 165 },
+                        i11: { w: 80, h: 165 }, // vân trơn
                         // i11: { w: 862, h: 1760 },// default 
-                        i11promax: { w: 886, h: 1831 },
+                        i11promax: { w: 80, h: 165 },
 
-                        s7: { w: 803, h: 1655 },
-                        s7e: { w: 827, h: 1760 },
-                        s8plus: { w: 827, h: 1843 },
-                        s8: { w: 780, h: 1724 },
-                        note8: { w: 862, h: 1902 },
-                        s9: { w: 791, h: 1713 },
-                        s9plus: { w: 839, h: 1843 },
-                        note9: { w: 886, h: 1902 },
-                        s10: { w: 815, h: 1760 },
-                        s10e: { w: 791, h: 1642 },
-                        s10plus: { w: 862, h: 1854 },
-                        note10: { w: 850, h: 1783 },
-                        note10plus: { w: 909, h: 1913 },
-                        sa50: { w: 886, h: 1866 },
-                        sa50s: { w: 886, h: 1866 },
-                        sa70: { w: 886, h: 1925 },
-                        sa750: { w: 886, h: 1866 },
-                        sa6plus: { w: 886, h: 1866 },
-                        sj6plus: { w: 886, h: 1866 },
+                        s7:{ w: 80, h: 165 },
+                        s7e: { w: 80, h: 165 },
+                        s8plus: { w: 80, h: 165 },
+                        s8: { w: 80, h: 165 },
+                        note8: { w: 80, h: 165 },
+                        s9:{ w: 80, h: 165 },
+                        s9plus:{ w: 80, h: 165 },
+                        note9: { w: 80, h: 165 },
+                        s10: { w: 80, h: 165 },
+                        s10e: { w: 80, h: 165 },
+                        s10plus: { w: 80, h: 165 },
+                        note10: { w: 80, h: 165 },
+                        note10plus: { w: 80, h: 165 },
+                        sa50: { w: 80, h: 165 },
+                        sa50s: { w: 80, h: 165 },
+                        sa70:{ w: 80, h: 165 },
+                        sa750:{ w: 80, h: 165 },
+                        sa6plus:{ w: 80, h: 165 },
+                        sj6plus:{ w: 80, h: 165 },
 
 
-                        hp20: { w: 815, h: 1736 },
-                        hp30p: { w: 839, h: 1843 },
-                        hp30: { w: 815, h: 1748 },
-                        mate20p: { w: 827, h: 1843 },
-                        hp20p: { w: 850, h: 1807 },
+                        hp20:{ w: 80, h: 165 },
+                        hp30p:{ w: 80, h: 165 },
+                        hp30:{ w: 80, h: 165 },
+                        mate20p: { w: 80, h: 165 },
+                        hp20p: { w: 80, h: 165 },
 
-                        oa5: { w: 874, h: 1819 },
-                        of11: { w: 886, h: 1925 },
-                        of11pro: { w: 886, h: 1878 },
-                        oneplus6: { w: 862, h: 1807 },
+                        oa5: { w: 80, h: 165 },
+                        of11: { w: 80, h: 165 },
+                        of11pro:{ w: 80, h: 165 },
+                        oneplus6: { w: 80, h: 165 },
 
-                        khay: { w: 28346, h: 15354 }
+                        khay: { w: 850, h: 550 }
 
                   }
             }
