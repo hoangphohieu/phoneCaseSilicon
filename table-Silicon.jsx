@@ -92,7 +92,7 @@ for (var ban = 0; ban <= arr.length - 1; ban++) { // loop  1 bàn
                     // app.doAction("moveCenter", "silicon");
                     { // xử lý và đưa ảnh sang bàn silicon
                         app.activeDocument.mergeVisibleLayers(); // gộp all layer 
-                        app.activeDocument.selection.selectAll(); // chọn tất cả ctrl + A
+                        // app.activeDocument.selection.selectAll(); // chọn tất cả ctrl + A
                         // app.doAction("smooth120", "silicon"); // tạo smooth - có 2 loại 120 va 80   
                         app.doAction("createRectangle120", "silicon");
                         // app.doAction("createRectangle80", "silicon");
