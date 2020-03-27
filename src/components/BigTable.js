@@ -15,15 +15,15 @@ class BigTable extends Component {
 
                   phoneCase: { // w và h tính theo pixcel
                         i6: { w: 80, h: 165 },
-                        i7:{ w: 80, h: 165 },// vân trơn
+                        i7: { w: 80, h: 165 },// vân trơn
                         // i7: { w: 791, h: 1630 }, // default 
                         i6plus: { w: 80, h: 165 },
                         i7plus: { w: 80, h: 165 },
                         ix: { w: 80, h: 165 },// vân trơn
-                        ixs:{ w: 80, h: 165 },// vân trơn
+                        ixs: { w: 80, h: 165 },// vân trơn
                         // ix: { w: 791, h: 1654 },// default 
                         // ixs: { w: 791, h: 1654 },// default 
-                        ixr:{ w: 80, h: 165 },
+                        ixr: { w: 80, h: 165 },
                         imax: { w: 80, h: 165 },// vân trơn
                         // imax: { w: 898, h: 1831 },// default 
                         i11pro: { w: 80, h: 165 },
@@ -31,13 +31,13 @@ class BigTable extends Component {
                         // i11: { w: 862, h: 1760 },// default 
                         i11promax: { w: 80, h: 165 },
 
-                        s7:{ w: 80, h: 165 },
+                        s7: { w: 80, h: 165 },
                         s7e: { w: 80, h: 165 },
                         s8plus: { w: 80, h: 165 },
                         s8: { w: 80, h: 165 },
                         note8: { w: 80, h: 165 },
-                        s9:{ w: 80, h: 165 },
-                        s9plus:{ w: 80, h: 165 },
+                        s9: { w: 80, h: 165 },
+                        s9plus: { w: 80, h: 165 },
                         note9: { w: 80, h: 165 },
                         s10: { w: 80, h: 165 },
                         s10e: { w: 80, h: 165 },
@@ -46,21 +46,21 @@ class BigTable extends Component {
                         note10plus: { w: 80, h: 165 },
                         sa50: { w: 80, h: 165 },
                         sa50s: { w: 80, h: 165 },
-                        sa70:{ w: 80, h: 165 },
-                        sa750:{ w: 80, h: 165 },
-                        sa6plus:{ w: 80, h: 165 },
-                        sj6plus:{ w: 80, h: 165 },
+                        sa70: { w: 80, h: 165 },
+                        sa750: { w: 80, h: 165 },
+                        sa6plus: { w: 80, h: 165 },
+                        sj6plus: { w: 80, h: 165 },
 
 
-                        hp20:{ w: 80, h: 165 },
-                        hp30p:{ w: 80, h: 165 },
-                        hp30:{ w: 80, h: 165 },
+                        hp20: { w: 80, h: 165 },
+                        hp30p: { w: 80, h: 165 },
+                        hp30: { w: 80, h: 165 },
                         mate20p: { w: 80, h: 165 },
                         hp20p: { w: 80, h: 165 },
 
                         oa5: { w: 80, h: 165 },
                         of11: { w: 80, h: 165 },
-                        of11pro:{ w: 80, h: 165 },
+                        of11pro: { w: 80, h: 165 },
                         oneplus6: { w: 80, h: 165 },
 
                         khay: { w: 850, h: 550 }
@@ -74,29 +74,46 @@ class BigTable extends Component {
       changePrint = () => { this.setState({ changePrint: !this.state.changePrint }) }
       render() {
 
+
             let items = this.props.itemsLocal;
             let itemSheet = this.props.items.listItem;
-            let itemCheck = []
+            let itemCheck = [];
             let sumAmount, itemsFilter, itemThua;
             let amountAllPhoneCase = [];
             let allFileName = [];
             let dataSortItems = [];
-            let danhsach2 = [];
-
             let arr = [];
-            // let arr = [[], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], []];
+
+            {
+                  itemSheet = itemSheet.map(param => {
+                        let dataparam = [param.nameDefault, Number(param.width), Number(param.hight), param.nameVariant.split(",")]
+                        return dataparam
+                  });
+                  console.log(itemSheet);
+
+            }
+
+
+
+
+
             if (items != null) {
                   // console.log(items.Sheet1);
                   items = items.Sheet1;
                   items = items.filter(item => (item.idClient !== undefined || item.amount !== undefined)); // lọc loại bỏ những item trắng
-
-
                   items = items.map(item => { return { ...item, amount: parseInt(item.amount), anyMore: false } }) // chuyển amount từ string sang number, thêm trạng thái anyMore:0
-
 
                   sumAmount = items.reduce((sum, item) => { // tính tổng amount
                         return (sum + parseInt(item.amount))
                   }, 0);
+                  items = items.map(item => {
+                        if (item.phoneCase === undefined) return item
+                        else {
+                              let itemfilter = itemSheet.filter(item2 => {
+                                          // đang code cái này
+                              })
+                        }
+                  });
 
                   items = items.map(item => { // đổi tên phoneCase cho ngắn gọn
                         if (item.phoneCase === undefined) return item
@@ -471,8 +488,7 @@ class BigTable extends Component {
                   // đếm ốp
                   let allPhoneCase = [];
                   let bodem = {};
-                  let danhSach = ["i6", "i6plus", "i7", "i7plus", "ix", "ixs", "ixr", "imax", "i11", "i11pro", "i11promax", "s7e", "s7", "s8", "s8plus", "note8", "s9", "s9plus", "note9", "s10e", "s10", "s10plus", "note10"
-                        , "note10plus", "sa50", "sa50s", "sa70", "sa6plus", "sj6plus", "of11", "of11pro", "oa5", "hp30", "hp30p", "hp20", "hp20p", "mate20p", "oneplus6"];
+
                   for (let j = 0; j < items.length; j++) { // lấy danh sách tên tất cả các đt trong items
                         if (allPhoneCase.indexOf(items[j].phoneCase) === -1)
                               allPhoneCase.push(items[j].phoneCase)
@@ -492,13 +508,6 @@ class BigTable extends Component {
                               </tr>)
                   }
 
-                  danhsach2 = danhSach.map(param => {
-                        if (bodem[param] !== undefined) return [param, bodem[param]]
-                        else return [param, 0]
-                        // console.log(param + " : " + bodem[param]);
-
-                  })
-                  console.log(danhsach2);
 
 
                   items = itemsFilter;
@@ -632,84 +641,46 @@ class BigTable extends Component {
                   itemCheck = JSON.parse(JSON.stringify(items));
             } // het if param!==undefi param.namened
 
-            // console.log(itemCheck);
-            // console.log(itemSheet);
-            itemSheet = itemSheet.filter(param4 => {
-                  return (param4.idDesign !== null && param4.phoneCase !== null)
-            })
-            let itemNotPrint = [];
-            {
-                  for (let k = 0; k < itemCheck.length; k++) {
-                        let itemC = [];
-                        for (let m = 0; m < itemSheet.length; m++) {
-                              if ((itemSheet[m].idDesign.toLowerCase().trim() === itemCheck[k].idDesign.toLowerCase().trim())
-                                    && (itemSheet[m].phoneCase.trim().toLowerCase() === itemCheck[k].name.toLowerCase().trim())
-                              ) {
-                                    itemC.push({ ...itemCheck[k], code: itemSheet[m].stt });
-                                    itemSheet[m] = null;
-                                    break;
-                              }
-                        }
-                        itemSheet = itemSheet.filter(param3 => param3 !== null)
-                        if (itemC.length !== 0) {
-                              itemNotPrint.push(itemC[0]);
-                        }
-                  }
 
-                  return (
-                        <React.Fragment>
-                              <button type="button" className="btn btn-primary mb-5 absolute inan" onClick={this.changePrint}>in ấn</button>
-                              {(this.state.changePrint === true) ? "" :
-                                    <div>
-                                          <FilesNone dataNone={allFileName} itemNoPrint={itemNotPrint} {...this.props} />
-                                          <DownText dataMayInTo={arr} {...this.props} />
-                                          <h1>Tổng tất cả: {sumAmount}</h1>
-                                          <button type="button" className="btn btn-primary mb-5" onClick={this.changeScreen}>đổi theme</button>
-                                          <ItemThua itemsThua={itemThua} {...this.props} />
-                                    </div>
-
-                              }
-                              <BanTo itemsBanTo={dataSortItems} printScreen={this.state.printScreen} {...this.props} />
-
-                              <h2 style={{ textAlign: 'center', marginTop: 50 }}>Tổng tất cả: {sumAmount}</h2>
-                              <div className="row justify-content-center">
-                                    <div className="col-5">
-
-                                          <table className="table table-striped table_amounts">
-                                                <thead>
-                                                      <tr>
-                                                            <th scope="col">STT</th>
-                                                            <th scope="col">TÊn</th>
-                                                            <th scope="col">SỐ LƯỢNG</th>
-                                                      </tr>
-                                                </thead>
-                                                <tbody>
-                                                      {amountAllPhoneCase}
-                                                </tbody>
-                                          </table>
-                                    </div>
-                                    <div className="col-5">
-                                          <table className="table  table_amounts">
-                                                <thead>
-                                                      <tr>
-                                                            <th scope="col">SỐ LƯỢNG</th>
-                                                      </tr>
-                                                </thead>
-                                                <tbody>
-                                                      {danhsach2.map((param, key) => <tr key={key}>
-                                                            {/* <td className="cot_row">{param[0]}</td> */}
-                                                            <td className="cot_row">{param[1]}</td>
-                                                      </tr>)}
-                                                </tbody>
-                                          </table>
-                                    </div>
-
+            return (
+                  <React.Fragment>
+                        <button type="button" className="btn btn-primary mb-5 absolute inan" onClick={this.changePrint}>in ấn</button>
+                        {(this.state.changePrint === true) ? "" :
+                              <div>
+                                    <FilesNone dataNone={allFileName} {...this.props} />
+                                    <DownText dataMayInTo={arr} {...this.props} />
+                                    <h1>Tổng tất cả: {sumAmount}</h1>
+                                    <button type="button" className="btn btn-primary mb-5" onClick={this.changeScreen}>đổi theme</button>
+                                    <ItemThua itemsThua={itemThua} {...this.props} />
                               </div>
 
+                        }
+                        <BanTo itemsBanTo={dataSortItems} printScreen={this.state.printScreen} {...this.props} />
 
-                        </React.Fragment>
-                  );
-            }
+                        <h2 style={{ textAlign: 'center', marginTop: 50 }}>Tổng tất cả: {sumAmount}</h2>
+                        <div className="row justify-content-center">
+                              <div className="col-5">
+
+                                    <table className="table table-striped table_amounts">
+                                          <thead>
+                                                <tr>
+                                                      <th scope="col">STT</th>
+                                                      <th scope="col">TÊn</th>
+                                                      <th scope="col">SỐ LƯỢNG</th>
+                                                </tr>
+                                          </thead>
+                                          <tbody>
+                                                {amountAllPhoneCase}
+                                          </tbody>
+                                    </table>
+                              </div>
+
+                        </div>
+
+
+                  </React.Fragment>
+            );
       }
 }
+
 export default BigTable;

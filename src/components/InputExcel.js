@@ -115,7 +115,7 @@ class InputExcel extends Component {
 
 
   render() {
-    console.log(this.props.items.listItem);
+    
 
     return (
       <div className="App ">

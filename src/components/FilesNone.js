@@ -31,7 +31,6 @@ class DownText extends Component {
         let allNameItems = this.props.dataNone;
         let itemNoPrint = this.props.itemNoPrint;
 
-        console.log(itemNoPrint);
         allNameItems = allNameItems.map(item => { return item.toLowerCase().trim() })
 
 
@@ -77,7 +76,7 @@ class DownText extends Component {
 
                         }
                     </div>
-                    <div className="col-5">
+                    {/* <div className="col-5">
                         {(itemNoPrint.length !== 0) ?
                             <table className="table table-striped table_amounts">
                                 <thead>
@@ -98,7 +97,7 @@ class DownText extends Component {
                             </table> : ""
 
                         }
-                    </div>
+                    </div> */}
                 </div>
 
 

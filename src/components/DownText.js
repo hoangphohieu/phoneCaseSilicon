@@ -30,7 +30,7 @@ class DownText extends Component {
       }
       else {
         obj[demoArr[k]] =[...obj[demoArr[k]],demoArr[k]]
-        console.log(obj);
+     
       }
 
     }
