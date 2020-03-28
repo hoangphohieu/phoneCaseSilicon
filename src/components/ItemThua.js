@@ -23,7 +23,7 @@ class ItemThua extends Component {
             
             return (
                   <div style={{textAlign:'center'}}>
-                        {(items!==undefined &&items.length===0)?"":<h1> item thừa:(sửa tên đầu tiên này !!)</h1>}
+                        {(items!==undefined &&items.length===0)?"":<h1>Có item lỗi</h1>}
                         
                          {items}
                   </div>

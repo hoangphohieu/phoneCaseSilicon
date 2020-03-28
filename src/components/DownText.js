@@ -21,25 +21,6 @@ class DownText extends Component {
 
   render() {
 
-    var demoArr = [1, 2, 2, 3, 4, 5, 5];
-    var obj = {}
-
-    for (let k = 0; k < demoArr.length; k++) {
-      if (obj[demoArr[k]] === undefined) {
-        obj[demoArr[k]] = [demoArr[k]]
-      }
-      else {
-        obj[demoArr[k]] =[...obj[demoArr[k]],demoArr[k]]
-     
-      }
-
-    }
-
-
-
-
-
-
     let arr = this.props.dataMayInTo
     let { day, mounth } = this.props;
 

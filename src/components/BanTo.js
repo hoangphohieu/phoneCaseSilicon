@@ -10,7 +10,7 @@ class BanTo extends Component {
             let danhSachItem;
             
 
-            items = _.chunk(items, 12);
+            items = _.chunk(items, 24);
             // console.log(items);
 
 
