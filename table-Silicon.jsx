@@ -1,22 +1,3 @@
-// app.activeDocument.activeLayer.duplicate(app.activeDocument.activeLayer,ElementPlacement.PLACEBEFORE);
-// app.activeDocument.resizeCanvas(800,1500);
-
-// (function (){
-//     var startRulerUnits = app.preferences.rulerUnits;  
-//     app.preferences.rulerUnits = Units.PIXELS;  
-//     var bounds = activeDocument.activeLayer.bounds;  
-//     var width2 = bounds[2].value - bounds[0].value;
-//     alert(width2)
-//     var newSize = (800*100/ 4000);  
-//     activeDocument.artLayers["Background copy"].resize(newSize, newSize, AnchorPosition.TOPLEFT);
-//     app.preferences.rulerUnits = startRulerUnits;  
-// })();
-
-// app.activeDocument.activeLayer.name="1";
-// app.doAction("selectArea","silicon");
-
-
-
 
 "object" != typeof JSON && (JSON = {}), function () { "use strict"; var rx_one = /^[\],:{}\s]*$/, rx_two = /\\(?:["\\\/bfnrt]|u[0-9a-fA-F]{4})/g, rx_three = /"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g, rx_four = /(?:^|:|,)(?:\s*\[)+/g, rx_escapable = /[\\"\u0000-\u001f\u007f-\u009f\u00ad\u0600-\u0604\u070f\u17b4\u17b5\u200c-\u200f\u2028-\u202f\u2060-\u206f\ufeff\ufff0-\uffff]/g, rx_dangerous = /[\u0000\u00ad\u0600-\u0604\u070f\u17b4\u17b5\u200c-\u200f\u2028-\u202f\u2060-\u206f\ufeff\ufff0-\uffff]/g, gap, indent, meta, rep; function f(t) { return t < 10 ? "0" + t : t } function this_value() { return this.valueOf() } function quote(t) { return rx_escapable.lastIndex = 0, rx_escapable.test(t) ? '"' + t.replace(rx_escapable, function (t) { var e = meta[t]; return "string" == typeof e ? e : "\\u" + ("0000" + t.charCodeAt(0).toString(16)).slice(-4) }) + '"' : '"' + t + '"' } function str(t, e) { var r, n, o, u, f, a = gap, i = e[t]; switch (i && "object" == typeof i && "function" == typeof i.toJSON && (i = i.toJSON(t)), "function" == typeof rep && (i = rep.call(e, t, i)), typeof i) { case "string": return quote(i); case "number": return isFinite(i) ? String(i) : "null"; case "boolean": case "null": return String(i); case "object": if (!i) return "null"; if (gap += indent, f = [], "[object Array]" === Object.prototype.toString.apply(i)) { for (u = i.length, r = 0; r < u; r += 1)f[r] = str(r, i) || "null"; return o = 0 === f.length ? "[]" : gap ? "[\n" + gap + f.join(",\n" + gap) + "\n" + a + "]" : "[" + f.join(",") + "]", gap = a, o } if (rep && "object" == typeof rep) for (u = rep.length, r = 0; r < u; r += 1)"string" == typeof rep[r] && (o = str(n = rep[r], i)) && f.push(quote(n) + (gap ? ": " : ":") + o); else for (n in i) Object.prototype.hasOwnProperty.call(i, n) && (o = str(n, i)) && f.push(quote(n) + (gap ? ": " : ":") + o); return o = 0 === f.length ? "{}" : gap ? "{\n" + gap + f.join(",\n" + gap) + "\n" + a + "}" : "{" + f.join(",") + "}", gap = a, o } } "function" != typeof Date.prototype.toJSON && (Date.prototype.toJSON = function () { return isFinite(this.valueOf()) ? this.getUTCFullYear() + "-" + f(this.getUTCMonth() + 1) + "-" + f(this.getUTCDate()) + "T" + f(this.getUTCHours()) + ":" + f(this.getUTCMinutes()) + ":" + f(this.getUTCSeconds()) + "Z" : null }, Boolean.prototype.toJSON = this_value, Number.prototype.toJSON = this_value, String.prototype.toJSON = this_value), "function" != typeof JSON.stringify && (meta = { "\b": "\\b", "\t": "\\t", "\n": "\\n", "\f": "\\f", "\r": "\\r", '"': '\\"', "\\": "\\\\" }, JSON.stringify = function (t, e, r) { var n; if (gap = "", indent = "", "number" == typeof r) for (n = 0; n < r; n += 1)indent += " "; else "string" == typeof r && (indent = r); if (rep = e, e && "function" != typeof e && ("object" != typeof e || "number" != typeof e.length)) throw new Error("JSON.stringify"); return str("", { "": t }) }), "function" != typeof JSON.parse && (JSON.parse = function (text, reviver) { var j; function walk(t, e) { var r, n, o = t[e]; if (o && "object" == typeof o) for (r in o) Object.prototype.hasOwnProperty.call(o, r) && (void 0 !== (n = walk(o, r)) ? o[r] = n : delete o[r]); return reviver.call(t, e, o) } if (text = String(text), rx_dangerous.lastIndex = 0, rx_dangerous.test(text) && (text = text.replace(rx_dangerous, function (t) { return "\\u" + ("0000" + t.charCodeAt(0).toString(16)).slice(-4) })), rx_one.test(text.replace(rx_two, "@").replace(rx_three, "]").replace(rx_four, ""))) return j = eval("(" + text + ")"), "function" == typeof reviver ? walk({ "": j }, "") : j; throw new SyntaxError("JSON.parse") }) }();
 app.preferences.rulerUnits = Units.PIXELS; // hệ đo pixel
@@ -33,6 +14,17 @@ var arr = data.data;
 var day = data.day;
 var mounth = data.mounth;
 var hAll = 6496, wAll = 10039;
+
+
+var wtem = 50; var htem = 30;
+wtem = Math.round(wtem / 0.084667);
+htem = Math.round(htem / 0.084667);
+
+
+
+
+
+
 { // khoảng cách padding của bàn mica
     var paddingLeft = 20;
     var paddingBottom = 10;
@@ -60,8 +52,7 @@ for (var ban = 0; ban <= arr.length - 1; ban++) { // loop  1 bàn
     }
 
     for (var i = 0; i <= arr[ban].length - 1; i++) { // loop 1 hàng
-        for (var j = 0; j <= 1; j++) { // lop 1 cái
-            // for (var j = 0; j <= arr[ban][i].length - 1; j++) { // lop 1 cái
+            for (var j = 0; j <= arr[ban][i].length - 1; j++) { // lop 1 cái
             var wphone = arr[ban][i][j].pixel.w;
             var hphone = arr[ban][i][j].pixel.h;
             wphone = Math.round((wphone - paddingPrintLR) / 0.084667);
@@ -190,8 +181,7 @@ for (var ban = 0; ban <= arr.length - 1; ban++) { // loop  1 bàn
     app.activeDocument.layerSets.getByName("SPOT").visible = false;
 
     app.activeDocument.rotateCanvas(180);
-    if (!Folder("~/Desktop/in an/silicon/").exists) { Folder("~/Desktop/in an/silicon/").create(); }
-    var folder1 = Folder("~/Desktop/in an/silicon/silicon " + (i + 1) + " ngay " + day);
+    var folder1 = Folder("~/Desktop/in an/silicon " + (ban + 1) + " ngay " + day);
     if (!folder1.exists) { folder1.create(); }
     app.activeDocument.saveAs(folder1, TiffSaveOptions, false, Extension.LOWERCASE);
     app.activeDocument.close();
@@ -202,6 +192,114 @@ for (var ban = 0; ban <= arr.length - 1; ban++) { // loop  1 bàn
 
 
 
+{// chạy nhãn dán
+    app.documents.add(wtem, htem, 300, "tem");
+
+    { // tạo nhãn
+        { // màu chữ đen
+            var colorTextBlack = new SolidColor(); // tao mau cho layer
+            colorTextBlack.rgb.red = 0;
+            colorTextBlack.rgb.green = 0;
+            colorTextBlack.rgb.blue = 0;
+        }
+        { // tạo id client
+            app.activeDocument.artLayers.add(); // tao layer text
+            app.activeDocument.activeLayer.kind = LayerKind.TEXT;
+            app.activeDocument.activeLayer.name = "idClient";
+            app.activeDocument.activeLayer.textItem.contents = "idClient";
+            app.activeDocument.activeLayer.textItem.kind = TextType.PARAGRAPHTEXT; // loại text
+            app.activeDocument.activeLayer.textItem.width = 100; // chiều rộng của khung
+            app.activeDocument.activeLayer.textItem.height = 60; // chiều cao của khung
+            app.activeDocument.activeLayer.textItem.autoLeadingAmount = 80; // leading - khoảng cách giữa 2 dòng
+            app.activeDocument.activeLayer.textItem.justification = Justification.CENTER; // căn giữa
+            app.activeDocument.activeLayer.textItem.size = 15; // font size
+            app.activeDocument.activeLayer.textItem.color = colorTextBlack; // màu chữ 
+
+        }
+        { // tao thanh chia
+            PIdClient = app.activeDocument.artLayers.getByName("idClient").bounds;
+            app.doAction("createRectangleTem", "silicon");
+            app.activeDocument.artLayers.getByName("Rectangle 1").translate(430, 0);
+            var PRectangleTem = app.activeDocument.artLayers.getByName("Rectangle 1").bounds;
+        }
+
+        { // tao ngay in 
+            app.activeDocument.artLayers.add(); // tao layer text
+            app.activeDocument.activeLayer.kind = LayerKind.TEXT;
+            app.activeDocument.activeLayer.name = "date";
+            app.activeDocument.activeLayer.textItem.contents = "date";
+            app.activeDocument.activeLayer.textItem.kind = TextType.PARAGRAPHTEXT; // loại text
+            app.activeDocument.activeLayer.textItem.width = 100; // chiều rộng của khung
+            app.activeDocument.activeLayer.textItem.justification = Justification.CENTER; // căn giữa
+            app.activeDocument.activeLayer.textItem.size = 10; // font size
+            app.activeDocument.activeLayer.textItem.color = colorTextBlack; // màu chữ 
+            app.doAction("moveTL", "silicon");
+            app.activeDocument.artLayers.getByName("date").translate(0, 290);
+
+        }
+
+        {// tao stt
+            app.activeDocument.artLayers.add(); // tao layer text
+            app.activeDocument.activeLayer.kind = LayerKind.TEXT;
+            app.activeDocument.activeLayer.name = "stt";
+            app.activeDocument.activeLayer.textItem.contents = "stt";
+            app.activeDocument.activeLayer.textItem.size = 13; // font size
+            app.activeDocument.activeLayer.textItem.color = colorTextBlack; // màu chữ 
+
+
+
+        }
+
+        {// tao amount
+            app.activeDocument.artLayers.add(); // tao layer text
+            app.activeDocument.activeLayer.kind = LayerKind.TEXT;
+            app.activeDocument.activeLayer.name = "amount";
+            app.activeDocument.activeLayer.textItem.contents = "amount";
+            app.activeDocument.activeLayer.textItem.size = 20; // font size
+            app.activeDocument.activeLayer.textItem.color = colorTextBlack; // màu chữ 
+            app.activeDocument.activeLayer.textItem.fauxBold = true;
+        }
+    }
+    { // chaạy nhãn
+        for (var ban = 0; ban <= arr.length - 1; ban++) { // loop  1 bàn
+            for (var i = 0; i <= arr[ban].length - 1; i++) { // loop 1 hàng
+                for (var j = 0; j <= arr[ban][i].length - 1; j++) { // lop 1 cái
+                    app.activeDocument.artLayers.getByName("date").textItem.contents = arr[ban][i][j].name + "     " + day + "-" + mounth;
+
+                    app.activeDocument.artLayers.getByName("idClient").textItem.contents = arr[ban][i][j].idClient;
+                    app.activeDocument.activeLayer = app.activeDocument.artLayers.getByName("idClient");
+                    app.doAction("moveTL", "silicon");
+                    var PIdClient = app.activeDocument.artLayers.getByName("idClient").bounds;
+                    app.activeDocument.activeLayer.translate(10, (260 + PIdClient[1] - PIdClient[3]) / 2);
+
+                    app.activeDocument.artLayers.getByName("stt").textItem.contents = arr[ban][i][j].stt;
+                    app.activeDocument.activeLayer = app.activeDocument.artLayers.getByName("stt");
+                    app.doAction("moveTL", "silicon");
+                    var PStt = app.activeDocument.artLayers.getByName("stt").bounds;
+                    app.activeDocument.artLayers.getByName("stt").translate(
+                        PRectangleTem[2] + ((app.activeDocument.width - PRectangleTem[2] - PStt[2] + PStt[0]) / 2),
+                        (app.activeDocument.height / 2) + ((app.activeDocument.height / 2) - PStt[3] + PStt[1]) / 2);
+
+                    if (arr[ban][i][j].amount <= 1) { app.activeDocument.artLayers.getByName("amount").textItem.contents = "" }
+                    else {
+                        app.activeDocument.artLayers.getByName("amount").textItem.contents = arr[ban][i][j].amount;
+                    }
+
+                    app.activeDocument.activeLayer = app.activeDocument.artLayers.getByName("amount");
+                    app.doAction("moveTL", "silicon");
+                    var PAmount = app.activeDocument.artLayers.getByName("amount").bounds;
+                    app.activeDocument.artLayers.getByName("amount").translate(PRectangleTem[2] + ((app.activeDocument.width - PRectangleTem[2] - PAmount[2] + PAmount[0]) / 2), ((app.activeDocument.height / 2) - PAmount[3] + PAmount[1]) / 2);
+
+                    var folder1 = Folder("~/Desktop/in an/silicon " + (ban + 1) + " ngay " + day + "/tem");
+                    if (!folder1.exists) { folder1.create(); }
+                    app.activeDocument.saveAs(Folder("~/Desktop/in an/silicon " + (ban + 1) + " ngay " + day + "/tem/ " + arr[ban][i][j].stt + ".jpg"), JPEGSaveOptions, true, Extension.LOWERCASE);
+                }
+            }
+        }
+    }
+    app.activeDocument.close(SaveOptions.DONOTSAVECHANGES);
+
+}
 
 
 
@@ -210,5 +308,3 @@ for (var ban = 0; ban <= arr.length - 1; ban++) { // loop  1 bàn
 
 
 
-
-// app.doAction("createSpot","silicon");
