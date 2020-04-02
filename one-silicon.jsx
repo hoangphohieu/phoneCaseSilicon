@@ -1,11 +1,4 @@
 
-/*
-Code for Import https://scriptui.joonas.me — (Triple click to select): 
-{"activeId":15,"items":{"item-0":{"id":0,"type":"Dialog","parentId":false,"style":{"enabled":true,"varName":null,"windowType":"Dialog","creationProps":{"su1PanelCoordinates":false,"maximizeButton":false,"minimizeButton":false,"independent":false,"closeButton":true,"borderless":false,"resizeable":false},"text":"in silicon","preferredSize":[300,200],"margins":16,"orientation":"column","spacing":10,"alignChildren":["center","top"]}},"item-3":{"id":3,"type":"Panel","parentId":9,"style":{"enabled":true,"varName":null,"creationProps":{"borderStyle":"etched","su1PanelCoordinates":false},"text":"Chiều rộng","preferredSize":[130,0],"margins":10,"orientation":"column","spacing":10,"alignChildren":["fill","top"],"alignment":null}},"item-4":{"id":4,"type":"EditText","parentId":3,"style":{"enabled":true,"varName":null,"creationProps":{"noecho":false,"readonly":false,"multiline":false,"scrollable":false,"borderless":false,"enterKeySignalsOnChange":false},"softWrap":false,"text":"20","justify":"left","preferredSize":[0,0],"alignment":null,"helpTip":null}},"item-5":{"id":5,"type":"Panel","parentId":9,"style":{"enabled":true,"varName":null,"creationProps":{"borderStyle":"etched","su1PanelCoordinates":false},"text":"Chiều cao","preferredSize":[130,0],"margins":10,"orientation":"column","spacing":10,"alignChildren":["fill","top"],"alignment":null}},"item-6":{"id":6,"type":"EditText","parentId":5,"style":{"enabled":true,"varName":null,"creationProps":{"noecho":false,"readonly":false,"multiline":false,"scrollable":false,"borderless":false,"enterKeySignalsOnChange":false},"softWrap":false,"text":"20","justify":"left","preferredSize":[0,0],"alignment":null,"helpTip":null}},"item-7":{"id":7,"type":"StaticText","parentId":8,"style":{"enabled":true,"varName":null,"creationProps":{"truncate":"none","multiline":false,"scrolling":false},"softWrap":true,"text":"Đơn vị: mm","justify":"left","preferredSize":[0,0],"alignment":null,"helpTip":null}},"item-8":{"id":8,"type":"Group","parentId":0,"style":{"enabled":true,"varName":null,"preferredSize":[0,0],"margins":0,"orientation":"row","spacing":10,"alignChildren":["left","center"],"alignment":null}},"item-9":{"id":9,"type":"Group","parentId":0,"style":{"enabled":true,"varName":null,"preferredSize":[0,0],"margins":0,"orientation":"row","spacing":10,"alignChildren":["left","center"],"alignment":null}},"item-11":{"id":11,"type":"Panel","parentId":0,"style":{"enabled":true,"varName":null,"creationProps":{"borderStyle":"etched","su1PanelCoordinates":false},"text":"Mã Design","preferredSize":[272,0],"margins":10,"orientation":"column","spacing":10,"alignChildren":["fill","top"],"alignment":null}},"item-12":{"id":12,"type":"EditText","parentId":11,"style":{"enabled":true,"varName":null,"creationProps":{"noecho":false,"readonly":false,"multiline":false,"scrollable":false,"borderless":false,"enterKeySignalsOnChange":false},"softWrap":false,"text":"aaa1","justify":"left","preferredSize":[0,0],"alignment":null,"helpTip":null}},"item-13":{"id":13,"type":"Group","parentId":0,"style":{"enabled":true,"varName":null,"preferredSize":[0,0],"margins":0,"orientation":"row","spacing":40,"alignChildren":["center","center"],"alignment":null}},"item-14":{"id":14,"type":"Button","parentId":13,"style":{"enabled":true,"varName":null,"text":"OK","justify":"left","preferredSize":[0,0],"alignment":null,"helpTip":null}},"item-15":{"id":15,"type":"Button","parentId":13,"style":{"enabled":true,"varName":null,"text":"Hủy","justify":"center","preferredSize":[0,0],"alignment":null,"helpTip":null}}},"order":[0,8,7,9,5,6,3,4,11,12,13,14,15],"settings":{"importJSON":true,"indentSize":false,"cepExport":false,"includeCSSJS":true,"showDialog":true,"functionWrapper":false,"afterEffectsDockable":false,"itemReferenceList":"None"}}
-*/
-
-// DIALOG
-// ======
 app.preferences.rulerUnits = Units.PIXELS; // hệ đo pixel
 { // UI dialog
     var dialog = new Window("dialog");
@@ -75,6 +68,29 @@ app.preferences.rulerUnits = Units.PIXELS; // hệ đo pixel
     var edittext3 = panel3.add('edittext {properties: {name: "edittext3"}}');
     edittext3.text = "";
 
+    // PANEL4
+    // ======
+    var panel4 = dialog.add("panel", undefined, undefined, { name: "panel4" });
+    panel4.text = "Tên lưu";
+    panel4.preferredSize.width = 272;
+    panel4.orientation = "column";
+    panel4.alignChildren = ["fill", "top"];
+    panel4.spacing = 10;
+    panel4.margins = 10;
+
+    var edittext4 = panel4.add('edittext {properties: {name: "edittext4"}}');
+    edittext4.text = "";
+
+
+
+    // DIALOG type
+    // ======
+    var dropdown1_array = ["Glass", "Luminous", "Led", "Silicon120", "Silicon80"];
+    var dropdown1 = dialog.add("dropdownlist", undefined, undefined, { name: "dropdown1", items: dropdown1_array });
+    dropdown1.selection = 0;
+    dropdown1.preferredSize.width = 100;
+
+
     // GROUP3
     // ======
     var group3 = dialog.add("group", undefined, { name: "group3" });
@@ -89,6 +105,9 @@ app.preferences.rulerUnits = Units.PIXELS; // hệ đo pixel
 
     var button2 = group3.add("button", undefined, undefined, { name: "button2" });
     button2.text = "Hủy";
+
+
+    // GROUP2
 }
 
 button1.onClick = function () { // on click oke
@@ -109,119 +128,27 @@ button1.onClick = function () { // on click oke
     else if (edittext3.text == "") {
         alert("Nhập đẩy đủ thông tin !");
     }
+    else if (edittext4.text == "") {
+        alert("Nhập đẩy đủ thông tin !");
+    }
 
     else {  // bắt đầu xử lý ảnh
-
-        try {
-            var wphone = edittext1.text;
-            var hphone = edittext2.text;
-            var idDesign = edittext3.text;
-            var paddingPrintTB = 5;
-            var paddingPrintLR = 5;
-            wphone = Math.round(wphone / 0.084667);
-            hphone = Math.round(hphone / 0.084667);
-
-            app.open(File("~/Desktop/file design/" + idDesign + ".tif"));
-
-
-            var checkIdDesign = idDesign.split("-");
-            checkIdDesign = checkIdDesign[checkIdDesign.length - 1];
-            if (checkIdDesign !== "spot") {
-                if (app.activeDocument.artLayers.length === 1) { // nhân đôi layer, kiểm tra nếu có 2 layer là phải làm lại từ đầu
-                    app.activeDocument.activeLayer.name = "1";
-                    app.activeDocument.activeLayer.duplicate(app.activeDocument.activeLayer, ElementPlacement.PLACEBEFORE); // nhân đôi layer
-                    app.activeDocument.resizeCanvas(wphone, hphone); // resize canvas về cỡ cần in với loại điện thoại
-
-                    { // resize layer về cỡ cần in
-                        if ((hphone / wphone) < 2) { var newSize = (wphone * 100 / 1200) }
-                        else { var newSize = (hphone * 100 / 2400) }
-                        app.activeDocument.artLayers["1 copy"].resize(newSize, newSize, AnchorPosition.MIDDLECENTER);
-                    }
-
-
-                    app.activeDocument.mergeVisibleLayers(); // gộp all layer 
-
-                    app.doAction("createRectangle120", "silicon");
-                    // app.doAction("createRectangle80", "silicon");
-                    var cropw = (wphone - Math.round(paddingPrintLR / 0.084667)) * 100 / 1000;
-                    var croph = (hphone - Math.round(paddingPrintTB / 0.084667)) * 100 / 1500;
-                    app.activeDocument.activeLayer.resize(cropw, croph, AnchorPosition.MIDDLECENTER);
-                    app.doAction("selectAreaLayer", "silicon");
-                    app.activeDocument.artLayers.getByName("Rounded Rectangle 1").remove();
-
-                    app.doAction("duplicateSelection", "silicon"); // tạo layer mới từ vùng chọn
-                    app.activeDocument.activeLayer.name = "2";
-                    app.doAction("createSpot", "silicon");
-                    app.activeDocument.artLayers.getByName("Background").visible = false;
-                    app.activeDocument.artLayers.getByName("2").visible = false;
-                    app.doAction("createSpotChannel", 'silicon');
-                    app.activeDocument.artLayers.getByName("Background").visible = true;
-                    app.activeDocument.artLayers.getByName("2").visible = true;
-                    app.doAction("createCMYKOne", "silicon");
-
-
-                }
-                else { alert("file design khong > 1 layer") };
-
-            }
-            // else {
-            //     if (app.activeDocument.artLayers.length === 1) { // nhân đôi layer, kiểm tra nếu có 2 layer là phải làm lại từ đầu
-            //         app.activeDocument.rotateCanvas(180);
-            //         app.activeDocument.activeLayer.name = "1";
-            //         app.activeDocument.artLayers.add();
-            //         app.doAction("strokeWhite1px", "silicon");
-            //         app.activeDocument.mergeVisibleLayers();
-
-            //         app.activeDocument.activeLayer.duplicate(app.activeDocument.activeLayer, ElementPlacement.PLACEBEFORE); // nhân đôi layer
-            //         app.activeDocument.resizeCanvas(wphone, hphone); // resize canvas về cỡ cần in với loại điện thoại
-
-            //         { // resize layer về cỡ cần in
-            //             if ((hphone / wphone) < 2) { var newSize = (wphone * 100 / 1200) }
-            //             else { var newSize = (hphone * 100 / 2400) }
-            //             app.activeDocument.artLayers[0].resize(newSize, newSize, AnchorPosition.MIDDLECENTER);
-            //         }
-
-            //         // app.doAction("moveCenter", "silicon");
-            //         { // xử lý và đưa ảnh sang bàn silicon
-            //             app.activeDocument.mergeVisibleLayers(); // gộp all layer 
-            //             app.activeDocument.selection.selectAll(); // chọn tất cả ctrl + A
-            //             // app.doAction("smooth120", "silicon"); // tạo smooth - có 2 loại 120 va 80   
-            //             app.doAction("createRectangle120", "silicon");
-            //             // app.doAction("createRectangle80", "silicon");
-            //             var cropw = wphone * 100 / 1000;
-            //             var croph = hphone * 100 / 1500;
-            //             app.activeDocument.activeLayer.resize(cropw, croph, AnchorPosition.MIDDLECENTER);
-            //             app.doAction("selectAreaLayer", "silicon");
-            //             app.activeDocument.artLayers.getByName("Rounded Rectangle 1").remove();
-
-            //             app.doAction("duplicateSelection", "silicon"); // tạo layer mới từ vùng chọn
-            //             app.doAction("strokeWhite1px", "silicon");
-            //             app.activeDocument.activeLayer.name = arr[ban][i][j].stt; // đặt tên cho layer voi stt
-            //             app.activeDocument.activeLayer.duplicate(app.documents["silicon"].layerSets["CMYK"], ElementPlacement.PLACEATBEGINNING);// đưa file in sang bên bàn in
-            //             app.activeDocument.activeLayer.name = "2";
-            //             app.doAction("createSpot-spot", "silicon");
-            //             app.doAction("strokeWhite1px", "silicon");
-            //             app.activeDocument.artLayers[0].name = arr[ban][i][j].stt; // đặt tên cho layer voi stt
-            //             app.activeDocument.activeLayer.duplicate(app.documents["silicon"].layerSets["SPOT"], ElementPlacement.PLACEATBEGINNING);// đưa file in sang bên bàn in
-            //             app.activeDocument.close(SaveOptions.DONOTSAVECHANGES);
-            //         }
-
-            //         { // translate layer đến vị trí cần in
-            //             app.activeDocument.activeLayer = app.activeDocument.layerSets["CMYK"].artLayers.getByName(arr[ban][i][j].stt);
-            //             app.doAction("moveZero", "silicon");
-            //             app.activeDocument.activeLayer.translate(paddingLeft + j * wk + Math.round(paddingPrintLR / 0.084667), (paddingBottom + i * hk + Math.round(paddingPrintTB / 0.084667)) * (-1));
-            //             app.activeDocument.activeLayer = app.activeDocument.layerSets["SPOT"].artLayers.getByName(arr[ban][i][j].stt);
-            //             app.doAction("moveZero", "silicon");
-            //             app.activeDocument.activeLayer.translate(paddingLeft + j * wk + Math.round(paddingPrintLR / 0.084667), (paddingBottom + i * hk + Math.round(paddingPrintTB / 0.084667)) * (-1));
-            //         }
-
-            //     }
-            //     else { alert("file design khong > 1 layer") };
-            // }
-
-        } catch (error) {
-            alert("sai mã Design !")
+        if (String(dropdown1.selection) == "Glass") {
+            createOneGlass(edittext1.text, edittext2.text, edittext3.text, edittext4.text);
         }
+        else if (String(dropdown1.selection) == "Luminous") {
+            createOneLuminous(edittext1.text, edittext2.text, edittext3.text, edittext4.text);
+        }
+        else if (String(dropdown1.selection) == "Led") {
+            createOneLed(edittext1.text, edittext2.text, edittext3.text, edittext4.text);
+        }
+        else if (String(dropdown1.selection) == "Silicon120") {
+            createOneSilicon120(edittext1.text, edittext2.text, edittext3.text, edittext4.text);
+        }
+        else if (String(dropdown1.selection) == "Silicon80") {
+            createOneSilicon80(edittext1.text, edittext2.text, edittext3.text, edittext4.text);
+        }
+
     }
 
 
@@ -239,18 +166,317 @@ button2.onClick = function () { // onclick hủy
 dialog.show();
 
 
-if (app.documents.length !== 0) {
-    var nameCheckSave=app.activeDocument.name;
-    nameCheckSave=nameCheckSave.split(".")[0];
-    nameCheckSave=nameCheckSave.toString().toLowerCase();
-    var nameCheckSave2=edittext3.text.toString().toLowerCase();
-  
+function createOneSilicon120(wphone, hphone, idDesign, saveName) {
 
-    if (nameCheckSave == nameCheckSave2) {
-        app.doAction("saveFileOne", "silicon");
+    try {
+        var paddingPrintTB = 5;
+        var paddingPrintLR = 5;
+        wphone = Math.round(wphone / 0.084667);
+        hphone = Math.round(hphone / 0.084667);
+        app.open(File("~/Desktop/file design/" + idDesign + ".tif"));
+        var checkIdDesign = idDesign.split("-");
+        checkIdDesign = checkIdDesign[checkIdDesign.length - 1];
+        if (checkIdDesign !== "spot") {
+            if (app.activeDocument.artLayers.length === 1) { // nhân đôi layer, kiểm tra nếu có 2 layer là phải làm lại từ đầu
+                app.activeDocument.activeLayer.name = "1";
+                app.activeDocument.activeLayer.duplicate(app.activeDocument.activeLayer, ElementPlacement.PLACEBEFORE); // nhân đôi layer
+                app.activeDocument.resizeCanvas(wphone, hphone); // resize canvas về cỡ cần in với loại điện thoại
+                { // resize layer về cỡ cần in
+                    if ((hphone / wphone) < 2) { var newSize = (wphone * 100 / 1200) }
+                    else { var newSize = (hphone * 100 / 2400) }
+                    app.activeDocument.artLayers["1 copy"].resize(newSize, newSize, AnchorPosition.MIDDLECENTER);
+                }
+                app.activeDocument.mergeVisibleLayers(); // gộp all layer 
+                app.doAction("createRectangle120", "autoUv");
+                // app.doAction("createRectangle80", "silicon");
+                var cropw = (wphone - Math.round(paddingPrintLR / 0.084667)) * 100 / 1000;
+                var croph = (hphone - Math.round(paddingPrintTB / 0.084667)) * 100 / 1500;
+                app.activeDocument.activeLayer.resize(cropw, croph, AnchorPosition.MIDDLECENTER);
+                app.doAction("selectAreaLayer", "autoUv");
+                app.activeDocument.artLayers.getByName("Rounded Rectangle 1").remove();
+                app.doAction("duplicateSelection", "autoUv"); // tạo layer mới từ vùng chọn
+                app.activeDocument.activeLayer.name = "2";
+                app.doAction("createSpot", "autoUv");
+                app.activeDocument.artLayers.getByName("Background").visible = false;
+                app.activeDocument.artLayers.getByName("2").visible = false;
+                app.doAction("createSpotChannel", 'autoUv');
+                app.activeDocument.artLayers.getByName("Background").visible = true;
+                app.activeDocument.artLayers.getByName("2").visible = true;
+                app.doAction("createCMYKOne", "autoUv");
+            }
+            else { alert("file design khong > 1 layer") };
+        }
+        else {
+            if (app.activeDocument.artLayers.length === 1) { // nhân đôi layer, kiểm tra nếu có 2 layer là phải làm lại từ đầu
+                app.activeDocument.activeLayer.name = "1";
+                app.activeDocument.artLayers.add();
+                app.doAction("strokeWhite1px", "autoUv");
+                app.activeDocument.mergeVisibleLayers();
+                // app.activeDocument.activeLayer.duplicate(app.activeDocument.activeLayer, ElementPlacement.PLACEBEFORE); // nhân đôi layer
+                app.activeDocument.resizeCanvas(wphone, hphone); // resize canvas về cỡ cần in với loại điện thoại
+                { // resize layer về cỡ cần in
+                    if ((hphone / wphone) < 2) { var newSize = (wphone * 100 / 1200) }
+                    else { var newSize = (hphone * 100 / 2400) }
+                    app.activeDocument.artLayers[0].resize(newSize, newSize, AnchorPosition.MIDDLECENTER);
+                }
+                app.activeDocument.selection.selectAll(); // chọn tất cả ctrl + A
+                app.doAction("createRectangle120", "autoUv");
+                var cropw = wphone * 100 / 1000;
+                var croph = hphone * 100 / 1500;
+                app.activeDocument.activeLayer.resize(cropw, croph, AnchorPosition.MIDDLECENTER);
+                app.doAction("selectAreaLayer", "autoUv");
+                app.activeDocument.artLayers.getByName("Rounded Rectangle 1").remove();
+                app.doAction("duplicateSelection", "autoUv"); // tạo layer mới từ vùng chọn
+                app.doAction("strokeWhite1px", "autoUv");
+                app.activeDocument.artLayers[1].remove();
+                app.doAction("selectArea", "autoUv");
+                app.activeDocument.selection.contract(1);
+                app.doAction("createSPOTWithArea", "autoUv");
+
+            }
+            else { alert("file design khong > 1 layer") };
+
+        }
+        app.activeDocument.saveAs(Folder("~/Desktop/in an/" + saveName + ".tif"), TiffSaveOptions, false, Extension.LOWERCASE);
         app.activeDocument.close(SaveOptions.DONOTSAVECHANGES);
+
+    } catch (error) {
+        alert("sai mã Design !")
     }
 
 }
-// app.activeDocument.saveAs(Folder("~/Desktop/in an/"), TiffSaveOptions, false, Extension.LOWERCASE);
-// app.activeDocument.close(SaveOptions.DONOTSAVECHANGES);
+
+function createOneSilicon80(wphone, hphone, idDesign, saveName) {
+
+    try {
+        var paddingPrintTB = 5;
+        var paddingPrintLR = 5;
+        wphone = Math.round(wphone / 0.084667);
+        hphone = Math.round(hphone / 0.084667);
+        app.open(File("~/Desktop/file design/" + idDesign + ".tif"));
+        var checkIdDesign = idDesign.split("-");
+        checkIdDesign = checkIdDesign[checkIdDesign.length - 1];
+        if (checkIdDesign !== "spot") {
+            if (app.activeDocument.artLayers.length === 1) { // nhân đôi layer, kiểm tra nếu có 2 layer là phải làm lại từ đầu
+                app.activeDocument.activeLayer.name = "1";
+                app.activeDocument.activeLayer.duplicate(app.activeDocument.activeLayer, ElementPlacement.PLACEBEFORE); // nhân đôi layer
+                app.activeDocument.resizeCanvas(wphone, hphone); // resize canvas về cỡ cần in với loại điện thoại
+                { // resize layer về cỡ cần in
+                    if ((hphone / wphone) < 2) { var newSize = (wphone * 100 / 1200) }
+                    else { var newSize = (hphone * 100 / 2400) }
+                    app.activeDocument.artLayers["1 copy"].resize(newSize, newSize, AnchorPosition.MIDDLECENTER);
+                }
+                app.activeDocument.mergeVisibleLayers(); // gộp all layer 
+                // app.doAction("createRectangle120", "autoUv");
+                app.doAction("createRectangle80", "autoUv");
+                var cropw = (wphone - Math.round(paddingPrintLR / 0.084667)) * 100 / 1000;
+                var croph = (hphone - Math.round(paddingPrintTB / 0.084667)) * 100 / 1500;
+                app.activeDocument.activeLayer.resize(cropw, croph, AnchorPosition.MIDDLECENTER);
+                app.doAction("selectAreaLayer", "autoUv");
+                app.activeDocument.artLayers.getByName("Rounded Rectangle 1").remove();
+                app.doAction("duplicateSelection", "autoUv"); // tạo layer mới từ vùng chọn
+                app.activeDocument.activeLayer.name = "2";
+                app.doAction("createSpot", "autoUv");
+                app.activeDocument.artLayers.getByName("Background").visible = false;
+                app.activeDocument.artLayers.getByName("2").visible = false;
+                app.doAction("createSpotChannel", 'autoUv');
+                app.activeDocument.artLayers.getByName("Background").visible = true;
+                app.activeDocument.artLayers.getByName("2").visible = true;
+                app.doAction("createCMYKOne", "autoUv");
+            }
+            else { alert("file design khong > 1 layer") };
+        }
+        else {
+            if (app.activeDocument.artLayers.length === 1) { // nhân đôi layer, kiểm tra nếu có 2 layer là phải làm lại từ đầu
+                app.activeDocument.activeLayer.name = "1";
+                app.activeDocument.artLayers.add();
+                app.doAction("strokeWhite1px", "autoUv");
+                app.activeDocument.mergeVisibleLayers();
+                // app.activeDocument.activeLayer.duplicate(app.activeDocument.activeLayer, ElementPlacement.PLACEBEFORE); // nhân đôi layer
+                app.activeDocument.resizeCanvas(wphone, hphone); // resize canvas về cỡ cần in với loại điện thoại
+                { // resize layer về cỡ cần in
+                    if ((hphone / wphone) < 2) { var newSize = (wphone * 100 / 1200) }
+                    else { var newSize = (hphone * 100 / 2400) }
+                    app.activeDocument.artLayers[0].resize(newSize, newSize, AnchorPosition.MIDDLECENTER);
+                }
+                app.activeDocument.selection.selectAll(); // chọn tất cả ctrl + A
+                app.doAction("createRectangle80", "autoUv");
+                var cropw = wphone * 100 / 1000;
+                var croph = hphone * 100 / 1500;
+                app.activeDocument.activeLayer.resize(cropw, croph, AnchorPosition.MIDDLECENTER);
+                app.doAction("selectAreaLayer", "autoUv");
+                app.activeDocument.artLayers.getByName("Rounded Rectangle 1").remove();
+                app.doAction("duplicateSelection", "autoUv"); // tạo layer mới từ vùng chọn
+                app.doAction("strokeWhite1px", "autoUv");
+                app.activeDocument.artLayers[1].remove();
+                app.doAction("selectArea", "autoUv");
+                app.activeDocument.selection.contract(1);
+                app.doAction("createSPOTWithArea", "autoUv");
+
+            }
+            else { alert("file design khong > 1 layer") };
+
+        }
+
+    } catch (error) {
+        alert("sai mã Design !")
+    }
+    app.activeDocument.saveAs(Folder("~/Desktop/in an/" + saveName + ".tif"), TiffSaveOptions, false, Extension.LOWERCASE);
+    app.activeDocument.close(SaveOptions.DONOTSAVECHANGES);
+
+}
+function createOneGlass(wphone, hphone, idDesign, saveName) {
+    wphone = Math.round(wphone / 0.084667);
+    hphone = Math.round(hphone / 0.084667);
+    try {
+        app.open(File("~/Desktop/file design/" + idDesign + ".tif"));
+        if (app.activeDocument.width !== 1200 || app.activeDocument.height !== 2400) {
+            alert(idDesign, " khác cỡ 1200 x 2400 !")
+        }
+        else if (app.activeDocument.artLayers.length === 1) {
+            app.activeDocument.activeLayer.name = "1";
+            app.activeDocument.activeLayer.duplicate(app.activeDocument.activeLayer, ElementPlacement.PLACEBEFORE); // nhân đôi layer
+            app.activeDocument.resizeCanvas(wphone, hphone); // resize canvas về cỡ cần in với loại điện thoại
+            { // resize layer về cỡ cần in
+                if ((hphone / wphone) < 2) { var newSize = (wphone * 100 / 1200) }
+                else { var newSize = (hphone * 100 / 2400) }
+                app.activeDocument.artLayers["1 copy"].resize(newSize, newSize, AnchorPosition.MIDDLECENTER);
+                app.activeDocument.mergeVisibleLayers(); // gộp all layer 
+
+            }
+            app.activeDocument.selection.selectAll();
+            app.doAction("createSPOTWithArea", "autoUv");
+            app.activeDocument.rotateCanvas(180);
+            app.activeDocument.saveAs(Folder("~/Desktop/in an/" + saveName + ".tif"), TiffSaveOptions, false, Extension.LOWERCASE);
+            app.activeDocument.close(SaveOptions.DONOTSAVECHANGES);
+        }
+        else { alert("file design không > 1 layer !") };
+
+    } catch (error) {
+        alert("sai mã Design !")
+
+    }
+}
+
+function createOneLuminous(wphone, hphone, idDesign, saveName) {
+    wphone = Math.round(wphone / 0.084667);
+    hphone = Math.round(hphone / 0.084667);
+    try {
+        app.open(File("~/Desktop/file design/" + idDesign + ".tif"));
+        if (app.activeDocument.width !== 1200 || app.activeDocument.height !== 2400) {
+            alert(idDesign, " khác cỡ 1200 x 2400 !")
+        }
+        else if (app.activeDocument.artLayers.length === 1) {
+            app.activeDocument.activeLayer.name = "1";
+            app.activeDocument.activeLayer.duplicate(app.activeDocument.activeLayer, ElementPlacement.PLACEBEFORE); // nhân đôi layer
+            app.activeDocument.resizeCanvas(wphone, hphone); // resize canvas về cỡ cần in với loại điện thoại
+            { // resize layer về cỡ cần in
+                if ((hphone / wphone) < 2) { var newSize = (wphone * 100 / 1200) }
+                else { var newSize = (hphone * 100 / 2400) }
+                app.activeDocument.artLayers["1 copy"].resize(newSize, newSize, AnchorPosition.MIDDLECENTER);
+                app.activeDocument.mergeVisibleLayers(); // gộp all layer 
+                app.activeDocument.rotateCanvas(180);
+
+            }
+            app.activeDocument.saveAs(Folder("~/Desktop/in an/" + saveName + ".tif"), TiffSaveOptions, false, Extension.LOWERCASE);
+            app.activeDocument.artLayers.add();
+            app.activeDocument.artLayers[1].remove();
+            app.activeDocument.selection.selectAll();
+            app.doAction("createSPOTWithArea", "autoUv");
+            app.activeDocument.saveAs(Folder("~/Desktop/in an/" + saveName + "-white.tif"), TiffSaveOptions, false, Extension.LOWERCASE);
+
+            app.activeDocument.close(SaveOptions.DONOTSAVECHANGES);
+        }
+        else { alert("file design không > 1 layer !") };
+
+    } catch (error) {
+        alert("sai mã Design !")
+
+    }
+}
+
+function createOneLed(wphone, hphone, idDesign, saveName) {
+    // try {
+    wphone = Math.round(wphone / 0.084667);
+    hphone = Math.round(hphone / 0.084667);
+    app.open(File("~/Desktop/file design/" + idDesign + ".tif"));
+    app.open(File("~/Desktop/file design/" + idDesign + "flash.tif"));
+    if (app.documents.getByName(idDesign + ".tif").width !== 1200 || app.documents.getByName(idDesign + ".tif").height !== 2400) {
+        alert(arr[i][j].idDesign, " khác cỡ 1200 x 2400 !")
+    }
+    else if (app.documents.getByName(idDesign + "flash.tif").width !== 1200 || app.documents.getByName(idDesign + "flash.tif").height !== 2400) {
+        alert(arr[i][j].idDesign, " khác cỡ 1200 x 2400 !")
+    }
+    else if (app.documents.getByName(idDesign + "flash.tif").artLayers.length === 1) {
+        app.activeDocument = app.documents.getByName(idDesign + "flash.tif");
+        app.activeDocument.artLayers.add();
+        app.activeDocument.mergeVisibleLayers();
+        app.doAction("strokeWhite1px", "autoUv");
+        app.activeDocument.activeLayer.duplicate(app.documents.getByName(idDesign + ".tif").activeLayer, ElementPlacement.PLACEBEFORE);
+        app.activeDocument.close(SaveOptions.DONOTSAVECHANGES);
+        if (app.activeDocument.artLayers.length === 2) {
+            app.activeDocument.rotateCanvas(180);
+            app.activeDocument.artLayers.getByName("Background").duplicate(app.activeDocument.artLayers.getByName("Background"), ElementPlacement.PLACEBEFORE);
+            app.activeDocument.resizeCanvas(wphone, hphone); // resize canvas về cỡ cần in với loại điện thoại
+            { // resize layer về cỡ cần in
+                if ((hphone / wphone) < 2) { var newSize = (wphone * 100 / 1200) }
+                else { var newSize = (hphone * 100 / 2400) }
+                app.activeDocument.artLayers[0].resize(newSize, newSize, AnchorPosition.MIDDLECENTER);
+                app.activeDocument.artLayers[1].resize(newSize, newSize, AnchorPosition.MIDDLECENTER);
+                app.activeDocument.selection.selectAll();
+                app.doAction("createSPOTWithArea", "autoUv");
+                app.activeDocument.activeLayer = app.activeDocument.artLayers[0];
+                app.doAction("selectArea", "autoUv");
+                app.activeDocument.activeChannels = [app.activeDocument.channels.getByName("Spot Color 1")];
+                app.doAction("fillChannelsLED0", "autoUv");
+                showRGBChannel(); 
+                app.activeDocument.saveAs(Folder("~/Desktop/in an/" + saveName + " in 1.tif"), TiffSaveOptions, false, Extension.LOWERCASE);
+                app.activeDocument.channels.getByName("Spot Color 1").remove();
+                app.activeDocument.activeLayer = app.activeDocument.artLayers[0];
+                app.activeDocument.artLayers.add();
+                app.activeDocument.selection.selectAll();
+                {
+                    var bColor = new SolidColor;
+                    bColor.cmyk.cyan = 75;
+                    bColor.cmyk.magenta = 68;
+                    bColor.cmyk.yellow = 67;
+                    bColor.cmyk.black = 90;
+                    var wColor = new SolidColor;
+                    wColor.rgb.red = 255;
+                    wColor.rgb.green = 255;
+                    wColor.rgb.ble = 255;
+
+                }
+                app.activeDocument.selection.fill(bColor);
+                app.activeDocument.activeLayer = app.activeDocument.artLayers[1];
+                app.doAction("selectArea", "autoUv");
+                app.activeDocument.activeLayer = app.activeDocument.artLayers[0];
+                app.activeDocument.selection.fill(wColor);
+                app.activeDocument.selection.deselect();
+                app.doAction("createSPOTWithArea", "autoUv");
+                app.activeDocument.activeLayer = app.activeDocument.artLayers[1];
+                app.doAction("selectArea", "autoUv");
+                app.activeDocument.activeChannels = [app.activeDocument.channels.getByName("Spot Color 1")];
+                app.doAction("fillChannelsLED20", "autoUv");
+                showRGBChannel();
+                app.activeDocument.saveAs(Folder("~/Desktop/in an/" + saveName + " in 2.tif"), TiffSaveOptions, false, Extension.LOWERCASE);
+
+                app.activeDocument.close(SaveOptions.DONOTSAVECHANGES);
+            }
+
+        }
+        else { alert("file design không > 1 layer !") };
+    }
+    else { alert("file design không > 1 layer !") };
+    // } catch (error) {
+    //       alert("sai mã Design hoặc thiếu file flash!")
+
+    // }
+}
+
+
+function showRGBChannel() {
+    app.activeDocument.channels.getByName("Red").visible = true;
+    app.activeDocument.channels.getByName("Green").visible = true;
+    app.activeDocument.channels.getByName("Blue").visible = true;
+}

@@ -21,7 +21,12 @@ class DownText extends Component {
 
   render() {
 
-    let arr = this.props.dataMayInTo
+    let arr = this.props.dataMayInTo;
+    arr = arr.map(arr1 => {
+      if (arr1.length !== 0)
+        if (arr1[0].length === 0) return []
+      return arr1
+    })
     let { day, mounth } = this.props;
 
     let strWrite = {

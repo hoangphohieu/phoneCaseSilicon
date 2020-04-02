@@ -31,16 +31,19 @@ class BigTable extends Component {
             let dataSortItems = [];
             let arr = [];
             let danhsach2 = [];
+            let z9 = [], z10 = [];
+            let z9Screen = [], z10Screen = [];
+            let z9Json = [], z10Json = [];
             let danhSach = ["i6", "i6plus", "i7", "i7plus", "ix", "ixs", "ixr", "imax", "i11", "i11pro", "i11promax", "s7e", "s7", "s8", "s8plus", "note8", "s9", "s9plus", "note9", "s10e", "s10", "s10plus", "note10"
                   , "note10plus", "sa50", "sa50s", "sa70", "sa6plus", "sj6plus", "of11", "of11pro", "oa5", "hp30", "hp30p", "hp20", "hp20p", "mate20p", "oneplus6"];
 
             {
                   itemSheet = itemSheet.map(param => {
-                        let dataparam = [param.nameDefault, Number(param.width), Number(param.hight), param.nameVariant.split(",")];
+                        let dataparam = [param.nameDefault, Number(param.width), Number(param.hight), param.nameVariant.split(","), Number(param.numberMica), Number(param.zPosition)];
                         dataparam[3] = dataparam[3].filter(param2 => { return param2 !== "" });
                         return dataparam
                   });
-                  console.log(itemSheet);
+                  // console.log(itemSheet);
 
             }
 
@@ -186,10 +189,9 @@ class BigTable extends Component {
 
                   items = items.map((item, key) => { return { ...item, stt: key + 1 } });
                   dataSortItems = items;    // lấy danh sách để in bảng 12 ra màn hình
-                  console.log(items);
 
-                  items = items.map(item => { return { idClient: item.idClient, name: item.phoneCase, idDesign: item.idDesign.trim(), stt: item.stt, pixel: toPixel(item.phoneCase),country:item.country,amount:item.amount } })
-                  // console.log(items);
+
+                  console.log(items);
                   function toPixel(toPixel1) {// toPixel1 là nameDefault
                         let dataToPixel1 = itemSheet.filter(itemSheet1 => {
                               if (toPixel1 === itemSheet1[0]) { return true }
@@ -199,8 +201,103 @@ class BigTable extends Component {
                               alert("trên sheet có dòng đt bị lặp");
                               window.location.reload();
                         }
-                        return { w: dataToPixel1[0][1], h: dataToPixel1[0][2] }
+                        return [{ w: dataToPixel1[0][1], h: dataToPixel1[0][2] }, dataToPixel1[0][4], dataToPixel1[0][5]]
                   }
+                  items = items.map(item => {
+                        return {
+                              idClient: item.idClient,
+                              name: item.phoneCase,
+                              idDesign: item.idDesign.trim(),
+                              stt: item.stt, pixel: toPixel(item.phoneCase)[0],
+                              country: item.country,
+                              amount: item.amount,
+                              numberMica: toPixel(item.phoneCase)[1],
+                              zPosition: toPixel(item.phoneCase)[2]
+
+
+                        }
+                  })
+                  z9 = items.filter(items1 => items1.zPosition < 8);
+                  z10 = items.filter(items1 => items1.zPosition >= 8);
+                  // console.log(z9);
+                  // console.log(z10);
+
+
+                  function chiaban(zx) {
+                        zx = JSON.parse(JSON.stringify(zx));
+                        let z9Sort = [[]];
+                        while (zx.length > 0) {
+                              if (z9Sort[z9Sort.length - 1].length === 24) { z9Sort.push([]) };// nếu đã đủ 24 thì thêm arr mới để lưu
+
+                              let z9L2 = zx.length;
+                              let j = 0;
+                              while (z9L2 === zx.length) {
+                                    let z9End = z9Sort[z9Sort.length - 1];
+                                    if (zx[j].numberMica > z9End.filter(z9End1 => z9End1.name === zx[j].name).length) {
+                                          z9Sort[z9Sort.length - 1].push(zx[j]);
+                                          zx[j] = null;
+                                          zx = zx.filter(z91 => { return z91 !== null });
+                                    } else {
+                                          j = j + 1;
+                                    }
+                                    if (j >= zx.length) {
+                                          if (zx.length !== 0) {
+                                                z9Sort.push([]);
+                                                j = 0;
+                                          }
+                                    }
+                              }
+                        }
+
+
+                        // console.log(z9Sort);
+
+                        return z9Sort
+                  }
+                  z9Screen = chiaban(z9);
+                  z10Screen = chiaban(z10);
+                  { // chunk 8 
+                        z10Screen = z10Screen.map(z9Sort1 => {
+                              while (z9Sort1.length < 24) {
+                                    z9Sort1.push({
+                                          idClient: null,
+                                          country: null,
+                                          amount: null,
+                                          idDesign: null,
+                                          phoneCase: null,
+                                          stt: null
+                                    })
+                              }
+
+                              let a = _.chunk(z9Sort1, 8); return a
+                        });
+                        z9Screen = z9Screen.map(z9Sort1 => {
+                              while (z9Sort1.length < 24) {
+                                    z9Sort1.push({
+                                          idClient: null,
+                                          country: null,
+                                          amount: null,
+                                          idDesign: null,
+                                          phoneCase: null,
+                                          stt: null
+                                    })
+                              }
+
+                              let a = _.chunk(z9Sort1, 8); return a
+                        })
+                  }
+
+                  z9Json = chiaban(z9);
+                  z10Json = chiaban(z10);
+                  z9Json = z9Json.map(z9Sort1 => {
+                        let a = _.chunk(z9Sort1, 8); return a
+                  });
+                  z10Json = z10Json.map(z9Sort1 => {
+                        let a = _.chunk(z9Sort1, 8); return a
+                  });
+                  // console.log(z9);
+                  // console.log(z10);
+                  // console.log(items);
 
                   sumAmountAfter = items.length;
 
@@ -219,14 +316,14 @@ class BigTable extends Component {
                         {(this.state.changePrint === true) ? "" :
                               <div>
                                     <FilesNone dataNone={allFileName} {...this.props} />
-                                    <DownText dataMayInTo={arr} {...this.props} />
+                                    <DownText dataMayInTo={[z9Json, z10Json]} {...this.props} />
                                     <h1>Tổng tất cả: {sumAmountAfter + "/" + sumAmountBefore}</h1>
                                     <button type="button" className="btn btn-primary mb-5" onClick={this.changeScreen}>đổi theme</button>
                                     <ItemThua itemsThua={itemThua} {...this.props} />
                               </div>
 
                         }
-                        <BanTo itemsBanTo={dataSortItems} printScreen={this.state.printScreen} {...this.props} />
+                        <BanTo z9={z9Screen} z10={z10Screen} printScreen={this.state.printScreen} {...this.props} />
 
                         <h2 style={{ textAlign: 'center', marginTop: 50 }}>Tổng tất cả: {sumAmountAfter + "/" + sumAmountBefore}</h2>
                         <div className="row justify-content-center">

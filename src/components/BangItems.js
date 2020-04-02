@@ -10,21 +10,11 @@ class Bang12Items extends Component {
       }
       psdDone = () => { this.setState({ psdDone: true }) }
       render() {
-            let items = this.props.itemsBang12Items;
-            while (items.length < 24) {
-                  items.push({
-                        idClient: null,
-                        country: null,
-                        amount: null,
-                        idDesign: null,
-                        phoneCase: null,
-                        stt: null
-                  })
-            }
+            let items = this.props.Item24;
 
-            items = _.chunk(items, 8);
+
             let danhSachItem;
-            if (this.props.itemsBang12Items !== undefined) {
+            if (items !== undefined) {
                   danhSachItem = items.map((item, key1) =>
 
                         <div className="col-12" key={key1}>
@@ -35,7 +25,7 @@ class Bang12Items extends Component {
                                                 <MotBanInTo
                                                       key={key2}
                                                       idClient={item2.idClient}
-                                                      phoneCase={item2.phoneCase}
+                                                      phoneCase={item2.name}
                                                       idDesign={item2.idDesign}
                                                       amount={item2.amount}
                                                       dayExcel={this.state.dayExcel}
@@ -61,6 +51,7 @@ class Bang12Items extends Component {
                                                 <h1 style={{ fontSize: 35 }}>
                                                       Ban {this.props.numberTable + 1} {` excel ${this.props.day} - ${this.props.mounth}`}
                                                       <button type="button" className="btn btn-primary ml-5" onClick={this.psdDone}>Done</button>
+                                                      {(this.props.type === "z9") ? "     Z9" : "     Z10"}
                                                 </h1>
 
                                           </div>

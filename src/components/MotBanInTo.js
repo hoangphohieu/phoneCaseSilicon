@@ -37,7 +37,7 @@ class ItemBanTo extends Component {
                         <p className={" code_design" + ((amount > 1) ? " any_more " : "")} onClick={() => this.copyVanban(idClient)}>{idClient}</p>
                         <p className={"code_phone_case"}>{phoneCase}</p>
                         {(printScreen === false)
-                              ? <p className={"code_day_excel"}>{(amount > 1) ? (this.props.day + " -") : ""} <span>{(idDesign !== null) ? ((this.props.country.toLowerCase() === "us" || this.props.country.toLowerCase() === "united states") ? "US" : "WW") : ""}</span></p>
+                              ? <p className={"code_day_excel"}>{(amount >= 1) ? (this.props.day + " -") : ""} <span>{(idDesign !== null) ? ((this.props.country.toLowerCase() === "us" || this.props.country.toLowerCase() === "united states") ? "US" : "WW") : ""}</span></p>
                               : <p className={"p_ban_to" + (printScreen === true) ? "design_idDesign_banTo" : ""} style={{ color: "blue" }} onClick={() => this.copyVanban(idDesign)}>{idDesign}</p>
                         }
                         <p className="numberPosition">{numberPosition}</p>
